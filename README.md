@@ -1,7 +1,8 @@
 # Demod Analyzer
 
-Interactive analysis/demodulation of digital signals (BPSK, QPSK, 16-QAM)
-captured as interleaved IQ files. Python + PySide6 (Qt) + pyqtgraph.
+Interactive analysis/demodulation of digital signals (BPSK, QPSK, 16-QAM). Built to help [openstint](https://github.com/zsellera/openstint) development. Transponder test captures at `recordings/`.
+
+![analyzer](screenshots/analyzer.png)
 
 ## Setup / run
 
@@ -24,19 +25,15 @@ Try it on a synthetic signal:
 `make_test_signal.py` without arguments for a GUI with a live preview of the
 signal it is about to write.
 
-## Digital Demodulation Analyzer
+## Auxiliary tools
 
-Analyze BPSK/QPSK/QAM16 signals.
-
-![analyzer](screenshots/analyzer.png)
-
-## IQ splitter
+### IQ splitter
 
 Segment an IQ recording into smaller chunks based on RSSI
 
 ![splitter](screenshots/splitter.png)
 
-## Test signal generator
+### Test signal generator
 
 Generate test data; available in command line as well (see above)
 
