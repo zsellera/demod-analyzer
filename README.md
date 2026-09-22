@@ -41,3 +41,12 @@ Segment an IQ recording into smaller chunks based on RSSI
 Generate test data; available in command line as well (see above)
 
 ![generator](screenshots/generator.png)
+
+## License
+
+Copyright (C) 2026 Attila Zseller
+
+Licensed under the GNU General Public License v3.0 or later; see
+[LICENSE](LICENSE) for the full text. This program is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

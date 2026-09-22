@@ -108,6 +108,12 @@ jobs:
         set -eu
         cp README.md dist/bpsk-tools/
 
+        # The bundle is a binary distribution of a GPLv3 program, so the
+        # licence travels with it -- section 4 requires the notice next to the
+        # copies the user actually receives, which is the unzipped folder.
+        cp LICENSE dist/bpsk-tools/
+        test -s dist/bpsk-tools/LICENSE
+
         # recordings/ is copied in by the spec, next to the .exe files, so the
         # analyzer has something to open on a machine with no SDR attached. A
         # missing directory already fails the build step; this catches the
@@ -154,6 +160,9 @@ jobs:
           make_test_signal. Unzip and run the .exe you want; the three tools
           share the Python and Qt runtime in `_internal`, so keep the folder
           together. Example captures are in `recordings`.
+
+          Free software under the GNU GPL v3 or later; the full licence is in
+          `LICENSE` inside the zip. Source: this repository.
 
           Built from commit ${{ github.sha }} (${{ github.ref_name }})
       env:
