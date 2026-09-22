@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# PyInstaller output
+/build/
+/dist/
+
+# Test / analysis output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IQ captures and analyzer output (raw sample data, never source)
+*.cs8
+*.cs16
+*.cu8
+*.iq
+*.iq8
+*.iq16
+*.raw
+*.bin
+*.dat
+*.npy
+*-index.csv
+
+# ...except the small reference captures shipped with the tools and bundled
+# into the Windows release.
+!/recordings/**
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
