@@ -63,7 +63,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.setWindowTitle("Demod Analyzer")
         self.resize(1500, 950)
-        self.settings = QtCore.QSettings("bpsk-decode", "demod-analyzer")
+        self.settings = QtCore.QSettings("demod-analyzer", "demod-analyzer")
 
         self.f: dsp.IQFile | None = None
         self.res: dsp.DemodResult | None = None

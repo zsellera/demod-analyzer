@@ -101,7 +101,7 @@ def run_gui() -> int:
             super().__init__()
             self.setWindowTitle("Test Signal Generator")
             self.resize(1200, 800)
-            self.settings = QtCore.QSettings("bpsk-decode", "test-signal")
+            self.settings = QtCore.QSettings("demod-analyzer", "test-signal")
 
             self.x = np.zeros(0, complex)
             self.bits = np.zeros(0, np.uint8)

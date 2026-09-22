@@ -10,7 +10,7 @@
 # land next to the .exe files rather than inside _internal where PyInstaller
 # puts declared `datas`.
 #
-#     pyinstaller packaging/bpsk-tools.spec       (run from the repo root)
+#     pyinstaller packaging/demod-analyzer.spec       (run from the repo root)
 
 import os
 import shutil
@@ -77,7 +77,7 @@ collected = []
 for a in analyses:
     collected += [a.binaries, a.datas]
 
-BUNDLE_NAME = "bpsk-tools"
+BUNDLE_NAME = "demod-analyzer"
 
 COLLECT(
     *executables,

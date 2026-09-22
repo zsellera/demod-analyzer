@@ -37,16 +37,16 @@ jobs:
         pip install -r requirements.txt pyinstaller
 
     # One spec file, three executables, one shared _internal directory. See
-    # packaging/bpsk-tools.spec for why it is a spec rather than three
+    # packaging/demod-analyzer.spec for why it is a spec rather than three
     # `pyinstaller --onefile` calls.
     - name: Build bundle
-      run: pyinstaller --noconfirm --clean packaging/bpsk-tools.spec
+      run: pyinstaller --noconfirm --clean packaging/demod-analyzer.spec
 
     - name: Verify the runtime is shared, not triplicated
       shell: bash
       run: |
         set -eu
-        cd dist/bpsk-tools
+        cd dist/demod-analyzer
 
         for exe in demod_analyzer.exe iq_splitter.exe make_test_signal.exe; do
           test -f "$exe" || { echo "::error::${exe} was not built"; exit 1; }
@@ -77,7 +77,7 @@ jobs:
       shell: bash
       run: |
         set -eu
-        cd dist/bpsk-tools
+        cd dist/demod-analyzer
 
         # A real generate: exercises numpy, scipy and dsp.py end to end.
         ./make_test_signal.exe smoke.cs8 --format int8 --nsym 2000
@@ -106,31 +106,31 @@ jobs:
       shell: bash
       run: |
         set -eu
-        cp README.md dist/bpsk-tools/
+        cp README.md dist/demod-analyzer/
 
         # The bundle is a binary distribution of a GPLv3 program, so the
         # licence travels with it -- section 4 requires the notice next to the
         # copies the user actually receives, which is the unzipped folder.
-        cp LICENSE dist/bpsk-tools/
-        test -s dist/bpsk-tools/LICENSE
+        cp LICENSE dist/demod-analyzer/
+        test -s dist/demod-analyzer/LICENSE
 
         # recordings/ is copied in by the spec, next to the .exe files, so the
         # analyzer has something to open on a machine with no SDR attached. A
         # missing directory already fails the build step; this catches the
         # quieter case of a present but empty one, which is what a regression
         # in the .gitignore negation for *.cs8 / *.cu8 would leave behind.
-        n="$(find dist/bpsk-tools/recordings -type f | wc -l)"
+        n="$(find dist/demod-analyzer/recordings -type f | wc -l)"
         test "$n" -gt 0 || { echo "::error::recordings/ is empty in the bundle"; exit 1; }
         echo "bundled ${n} reference captures"
 
         cd dist
-        7z a -tzip ../bpsk-tools-windows-x64.zip bpsk-tools
+        7z a -tzip ../demod-analyzer-windows-x64.zip demod-analyzer
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: bpsk-tools-windows-x64
-        path: bpsk-tools-windows-x64.zip
+        name: demod-analyzer-windows-x64
+        path: demod-analyzer-windows-x64.zip
 
   release:
     needs: build
@@ -140,7 +140,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
-        name: bpsk-tools-windows-x64
+        name: demod-analyzer-windows-x64
         path: release
 
     # The release is named and tagged after the commit, not after a version
@@ -155,6 +155,9 @@ jobs:
       with:
         tag_name: ${{ steps.meta.outputs.short_sha }}
         name: ${{ steps.meta.outputs.short_sha }}
+        # Without this the release is created with no asset attached and the
+        # body below points at a zip nobody can download.
+        files: release/demod-analyzer-windows-x64.zip
         body: |
           Windows 64-bit build of demod_analyzer, iq_splitter and
           make_test_signal. Unzip and run the .exe you want; the three tools

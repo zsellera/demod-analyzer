@@ -27,7 +27,7 @@ class SplitterWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.setWindowTitle("IQ Splitter")
         self.resize(1400, 900)
-        self.settings = QtCore.QSettings("bpsk-decode", "iq-splitter")
+        self.settings = QtCore.QSettings("demod-analyzer", "iq-splitter")
 
         self.f: dsp.IQFile | None = None
         self.power = np.zeros(0, np.float32)
